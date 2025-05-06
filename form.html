@@ -3,152 +3,263 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Absensi Karyawan</title>
+  <title>Form Request</title>
   <style>
     * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  background-color: #f5f7fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  color: #333;
-}
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      color: #2d3748;
+      padding: 20px;
+    }
 
-.form-container {
-  background: #ffffff;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 450px;
-  text-align: left;
-}
+    .form-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      text-align: left;
+    }
 
-.form-container h2 {
-  font-size: 24px;
-  margin-bottom: 24px;
-  color: #333;
-  font-weight: 600;
-}
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-label {
-  display: block;
-  font-size: 14px;
-  margin: 16px 0 8px;
-  color: #555;
-  font-weight: 500;
-}
+    .header h2 {
+      font-size: 28px;
+      color: #3182ce;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
 
-input {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid #dce0e5;
-  background: #ffffff;
-  color: #333;
-  font-size: 15px;
-  outline: none;
-  transition: all 0.3s ease;
-}
+    .header p {
+      color: #718096;
+      font-size: 16px;
+    }
 
-input:focus {
-  border-color: #3a86ff;
-  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
-}
+    .form-group {
+      margin-bottom: 24px;
+    }
 
-button {
-  width: 100%;
-  padding: 12px 16px;
-  margin-top: 28px;
-  background-color: #3a86ff;
-  border: none;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
+    label {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: #4a5568;
+      font-weight: 500;
+    }
 
-button:hover {
-  background-color: #2d6ecf;
-}
+    input, textarea, select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #2d3748;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
 
-button:active {
-  transform: translateY(1px);
-}
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
 
-.alert {
-  margin-top: 16px;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  display: none;
-}
+    input:focus, textarea:focus, select:focus {
+      border-color: #4299e1;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    }
 
-.alert.success {
-  background-color: #e7f5ea;
-  color: #0d6832;
-  border: 1px solid #c5e7d0;
-}
+    button {
+      width: 100%;
+      padding: 14px 16px;
+      background-color: #3182ce;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-.alert.error {
-  background-color: #fdecee;
-  color: #b42a3c;
-  border: 1px solid #f8c9d0;
-}
+    button:hover {
+      background-color: #2b6cb0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(49, 130, 206, 0.25);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .alert {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      display: none;
+      text-align: center;
+    }
+
+    .alert.success {
+      background-color: #e6fffa;
+      color: #234e52;
+      border: 1px solid #b2f5ea;
+    }
+
+    .alert.error {
+      background-color: #fff5f5;
+      color: #c53030;
+      border: 1px solid #fed7d7;
+    }
+
+    .priority-options {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .priority-option {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .priority-option input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .priority-label {
+      display: block;
+      padding: 10px;
+      background-color: #edf2f7;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .priority-option input:checked + .priority-label {
+      background-color: #3182ce;
+      color: white;
+    }
+
+    .priority-high {
+      color: #c53030;
+    }
+
+    .priority-medium {
+      color: #dd6b20;
+    }
+
+    .priority-low {
+      color: #2b6cb0;
+    }
+
+    .priority-option input:checked + .priority-label.priority-high {
+      background-color: #c53030;
+    }
+
+    .priority-option input:checked + .priority-label.priority-medium {
+      background-color: #dd6b20;
+    }
+
+    .priority-option input:checked + .priority-label.priority-low {
+      background-color: #2b6cb0;
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2>Form Absensi</h2>
-    <form id="absenForm">
-      <label for="nama">Nama</label>
-      <input type="text" id="nama" name="nama" required />
+    <div class="header">
+      <h2>Form Request</h2>
+      <p>Kirim permintaan anda dengan mengisi form di bawah ini</p>
+    </div>
+    <form id="requestForm">
+      <div class="form-group">
+        <label for="nama">Nama</label>
+        <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required />
+      </div>
 
-      <label for="umur">Umur</label>
-      <input type="number" id="umur" name="umur" required />
+      <div class="form-group">
+        <label for="divisi">Divisi / Departemen</label>
+        <input type="text" id="divisi" name="divisi" placeholder="Masukkan divisi atau departemen" required />
+      </div>
 
-      <label for="kelas">Kelas / Divisi</label>
-      <input type="text" id="kelas" name="kelas" required />
+      <div class="form-group">
+        <label for="pesan">Detail Permintaan</label>
+        <textarea id="pesan" name="pesan" placeholder="Jelaskan permintaan anda secara detail" required></textarea>
+      </div>
 
-      <button type="submit">Kirim Absensi</button>
-      <div id="alert" class="alert">Absensi berhasil!</div>
-      <div id="alertError" class="alert error">Gagal mengirim absensi! Coba lagi.</div>
+      <div class="form-group">
+        <label>Prioritas</label>
+        <div class="priority-options">
+          <div class="priority-option">
+            <input type="radio" id="tinggi" name="prioritas" value="Tinggi" />
+            <label for="tinggi" class="priority-label priority-high">Tinggi</label>
+          </div>
+          <div class="priority-option">
+            <input type="radio" id="sedang" name="prioritas" value="Sedang" checked />
+            <label for="sedang" class="priority-label priority-medium">Sedang</label>
+          </div>
+          <div class="priority-option">
+            <input type="radio" id="rendah" name="prioritas" value="Rendah" />
+            <label for="rendah" class="priority-label priority-low">Rendah</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit">Kirim Request</button>
+      <div id="alertSuccess" class="alert success">Request berhasil dikirim!</div>
+      <div id="alertError" class="alert error">Gagal mengirim request! Coba lagi.</div>
     </form>
   </div>
 
   <script>
-    document.getElementById("absenForm").addEventListener("submit", async function (e) {
+    document.getElementById("requestForm").addEventListener("submit", async function (e) {
       e.preventDefault();
+      
       const nama = document.getElementById("nama").value;
-      const umur = document.getElementById("umur").value;
-      const kelas = document.getElementById("kelas").value;
-      const waktu = new Date().toLocaleString();
+      const divisi = document.getElementById("divisi").value;
+      const pesan = document.getElementById("pesan").value;
+      const prioritas = document.querySelector('input[name="prioritas"]:checked').value;
+      const waktu = new Date().toLocaleString('id-ID');
 
-      const res = await fetch("/api/absen", {
+      const res = await fetch("/api/request", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ nama, umur, kelas, waktu })
+        body: new URLSearchParams({ nama, divisi, pesan, prioritas, waktu })
       });
 
-      const alertSuccess = document.getElementById("alert");
+      const alertSuccess = document.getElementById("alertSuccess");
       const alertError = document.getElementById("alertError");
       
       if (res.ok) {
         alertSuccess.style.display = "block";
         setTimeout(() => {
           alertSuccess.style.display = "none";
-          document.getElementById("absenForm").reset();
+          document.getElementById("requestForm").reset();
+          document.getElementById("sedang").checked = true;
         }, 2000);
       } else {
         alertError.style.display = "block";
