@@ -24,7 +24,11 @@ app.get("/", (req, res) => {
 // Handle request
 app.post("/api/request", async (req, res) => {
     try {
-        const { nama, divisi, pesan, prioritas, waktu } = req.body;
+        const { nama, pesan, waktu } = req.body;
+        // Simpan dengan struktur yang kompatibel dengan sistem lama
+        // tetapi tanpa perlu divisi dan prioritas dari user
+        const divisi = "N/A"; // Default value since we removed the field
+        const prioritas = "Normal"; // Default value since we removed the field
         const data = { nama, divisi, pesan, prioritas, waktu };
 
         let requests = [];
@@ -37,15 +41,8 @@ app.post("/api/request", async (req, res) => {
         requests.push(data);
         fs.writeFileSync(requestsFile, JSON.stringify(requests, null, 2));
 
-        // Format pesan dengan emoji berdasarkan prioritas
-        let priorityEmoji = "🔵"; // Default untuk prioritas sedang
-        if (prioritas === "Tinggi") {
-            priorityEmoji = "🔴";
-        } else if (prioritas === "Rendah") {
-            priorityEmoji = "🟢";
-        }
-
-        const text = `📬 *REQUEST BARU*\n\n👤 *Nama:* ${nama}\n🏢 *Divisi:* ${divisi}\n${priorityEmoji} *Prioritas:* ${prioritas}\n\n📝 *Pesan:*\n${pesan}\n\n⏰ *Waktu:* ${waktu}`;
+        // Format pesan untuk Telegram yang lebih sederhana
+        const text = `📬 *REQUEST BARU*\n\n👤 *Nama:* ${nama}\n\n📝 *Pesan:*\n${pesan}\n\n⏰ *Waktu:* ${waktu}`;
         
         await axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
             chat_id: TELEGRAM_USER_ID,
@@ -84,14 +81,8 @@ app.post(`/webhook/${TELEGRAM_BOT_TOKEN}`, async (req, res) => {
                         responseText = "Belum ada request yang masuk.";
                     } else {
                         requests.forEach((item, index) => {
-                            let priorityEmoji = "🔵";
-                            if (item.prioritas === "Tinggi") {
-                                priorityEmoji = "🔴";
-                            } else if (item.prioritas === "Rendah") {
-                                priorityEmoji = "🟢";
-                            }
-                            
-                            responseText += `*${index + 1}.* ${item.nama} (${item.divisi})\n${priorityEmoji} *${item.prioritas}*: ${item.pesan}\n⏰ ${item.waktu}\n\n`;
+                            // Simplify the response format
+                            responseText += `*${index + 1}.* ${item.nama}\n📝 *Pesan:* ${item.pesan}\n⏰ ${item.waktu}\n\n`;
                         });
                     }
                 }
