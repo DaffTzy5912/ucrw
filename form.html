@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Absensi Karyawan</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #333;
+}
+
+.form-container {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 450px;
+  text-align: left;
+}
+
+.form-container h2 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: #333;
+  font-weight: 600;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin: 16px 0 8px;
+  color: #555;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #dce0e5;
+  background: #ffffff;
+  color: #333;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #3a86ff;
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
+}
+
+button {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 28px;
+  background-color: #3a86ff;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #2d6ecf;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.alert {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: none;
+}
+
+.alert.success {
+  background-color: #e7f5ea;
+  color: #0d6832;
+  border: 1px solid #c5e7d0;
+}
+
+.alert.error {
+  background-color: #fdecee;
+  color: #b42a3c;
+  border: 1px solid #f8c9d0;
+}
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Form Absensi</h2>
+    <form id="absenForm">
+      <label for="nama">Nama</label>
+      <input type="text" id="nama" name="nama" required />
+
+      <label for="umur">Umur</label>
+      <input type="number" id="umur" name="umur" required />
+
+      <label for="kelas">Kelas / Divisi</label>
+      <input type="text" id="kelas" name="kelas" required />
+
+      <button type="submit">Kirim Absensi</button>
+      <div id="alert" class="alert">Absensi berhasil!</div>
+      <div id="alertError" class="alert error">Gagal mengirim absensi! Coba lagi.</div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("absenForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value;
+      const umur = document.getElementById("umur").value;
+      const kelas = document.getElementById("kelas").value;
+      const waktu = new Date().toLocaleString();
+
+      const res = await fetch("/api/absen", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ nama, umur, kelas, waktu })
+      });
+
+      const alertSuccess = document.getElementById("alert");
+      const alertError = document.getElementById("alertError");
+      
+      if (res.ok) {
+        alertSuccess.style.display = "block";
+        setTimeout(() => {
+          alertSuccess.style.display = "none";
+          document.getElementById("absenForm").reset();
+        }, 2000);
+      } else {
+        alertError.style.display = "block";
+        setTimeout(() => {
+          alertError.style.display = "none";
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
