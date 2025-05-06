@@ -12,37 +12,44 @@
     }
 
     body {
-      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      background-color: #f0f4f8;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: #f7fafc;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      color: #2d3748;
+      color: #1a202c;
       padding: 20px;
     }
 
     .form-container {
       background: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 36px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
       width: 100%;
-      max-width: 500px;
+      max-width: 460px;
       text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     }
 
     .header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
     }
 
     .header h2 {
       font-size: 28px;
-      color: #3182ce;
+      color: #4c6ef5;
       font-weight: 700;
       margin-bottom: 10px;
+      letter-spacing: -0.5px;
     }
 
     .header p {
@@ -62,10 +69,10 @@
       font-weight: 500;
     }
 
-    input, textarea, select {
+    input, textarea {
       width: 100%;
-      padding: 14px 16px;
-      border-radius: 10px;
+      padding: 14px 18px;
+      border-radius: 12px;
       border: 1px solid #e2e8f0;
       background: #ffffff;
       color: #2d3748;
@@ -76,31 +83,36 @@
 
     textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 140px;
     }
 
-    input:focus, textarea:focus, select:focus {
-      border-color: #4299e1;
-      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    input:focus, textarea:focus {
+      border-color: #4c6ef5;
+      box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.15);
     }
 
     button {
       width: 100%;
-      padding: 14px 16px;
-      background-color: #3182ce;
+      padding: 16px;
+      background-color: #4c6ef5;
       border: none;
       color: #fff;
       font-size: 16px;
       font-weight: 600;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
     }
 
     button:hover {
-      background-color: #2b6cb0;
+      background-color: #364fc7;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(49, 130, 206, 0.25);
+      box-shadow: 0 4px 12px rgba(76, 110, 245, 0.25);
     }
 
     button:active {
@@ -111,11 +123,12 @@
     .alert {
       margin-top: 20px;
       padding: 16px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 15px;
       font-weight: 500;
       display: none;
       text-align: center;
+      transition: all 0.3s ease;
     }
 
     .alert.success {
@@ -130,62 +143,18 @@
       border: 1px solid #fed7d7;
     }
 
-    .priority-options {
-      display: flex;
-      gap: 10px;
-      margin-top: 6px;
+    /* Animation for the button */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(76, 110, 245, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(76, 110, 245, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(76, 110, 245, 0); }
     }
 
-    .priority-option {
-      flex: 1;
-      text-align: center;
-      position: relative;
-    }
-
-    .priority-option input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-    }
-
-    .priority-label {
-      display: block;
-      padding: 10px;
-      background-color: #edf2f7;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .priority-option input:checked + .priority-label {
-      background-color: #3182ce;
-      color: white;
-    }
-
-    .priority-high {
-      color: #c53030;
-    }
-
-    .priority-medium {
-      color: #dd6b20;
-    }
-
-    .priority-low {
-      color: #2b6cb0;
-    }
-
-    .priority-option input:checked + .priority-label.priority-high {
-      background-color: #c53030;
-    }
-
-    .priority-option input:checked + .priority-label.priority-medium {
-      background-color: #dd6b20;
-    }
-
-    .priority-option input:checked + .priority-label.priority-low {
-      background-color: #2b6cb0;
+    /* Send icon */
+    .send-icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
   </style>
 </head>
@@ -202,34 +171,17 @@
       </div>
 
       <div class="form-group">
-        <label for="divisi">Divisi / Departemen</label>
-        <input type="text" id="divisi" name="divisi" placeholder="Masukkan divisi atau departemen" required />
-      </div>
-
-      <div class="form-group">
         <label for="pesan">Detail Permintaan</label>
         <textarea id="pesan" name="pesan" placeholder="Jelaskan permintaan anda secara detail" required></textarea>
       </div>
 
-      <div class="form-group">
-        <label>Prioritas</label>
-        <div class="priority-options">
-          <div class="priority-option">
-            <input type="radio" id="tinggi" name="prioritas" value="Tinggi" />
-            <label for="tinggi" class="priority-label priority-high">Tinggi</label>
-          </div>
-          <div class="priority-option">
-            <input type="radio" id="sedang" name="prioritas" value="Sedang" checked />
-            <label for="sedang" class="priority-label priority-medium">Sedang</label>
-          </div>
-          <div class="priority-option">
-            <input type="radio" id="rendah" name="prioritas" value="Rendah" />
-            <label for="rendah" class="priority-label priority-low">Rendah</label>
-          </div>
-        </div>
-      </div>
-
-      <button type="submit">Kirim Request</button>
+      <button type="submit">
+        Kirim Request
+        <svg class="send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
       <div id="alertSuccess" class="alert success">Request berhasil dikirim!</div>
       <div id="alertError" class="alert error">Gagal mengirim request! Coba lagi.</div>
     </form>
@@ -240,10 +192,12 @@
       e.preventDefault();
       
       const nama = document.getElementById("nama").value;
-      const divisi = document.getElementById("divisi").value;
       const pesan = document.getElementById("pesan").value;
-      const prioritas = document.querySelector('input[name="prioritas"]:checked').value;
       const waktu = new Date().toLocaleString('id-ID');
+
+      // Since we removed priority and department, we'll set default values
+      const divisi = "N/A";
+      const prioritas = "Normal";
 
       const res = await fetch("/api/request", {
         method: "POST",
@@ -259,7 +213,6 @@
         setTimeout(() => {
           alertSuccess.style.display = "none";
           document.getElementById("requestForm").reset();
-          document.getElementById("sedang").checked = true;
         }, 2000);
       } else {
         alertError.style.display = "block";
