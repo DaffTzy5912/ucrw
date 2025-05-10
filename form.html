@@ -1,431 +1,115 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Form Request Modern</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Website Screenshot Generator</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
-    :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --success: #10b981;
-      --error: #ef4444;
-      --bg: #fafafa;
-      --card: #ffffff;
-      --text: #1e293b;
-      --text-secondary: #64748b;
-      --border: #e2e8f0;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
-      --radius: 16px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-        radial-gradient(at 90% 90%, rgba(79, 70, 229, 0.08) 0px, transparent 50%);
-      background-attachment: fixed;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
       min-height: 100vh;
-      margin: 0;
-      color: var(--text);
-      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .form-container {
-      background: var(--card);
-      padding: 40px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      width: 100%;
-      max-width: 500px;
-      text-align: left;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .form-container::before {
-      content: "";
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0.05));
-      border-radius: 50%;
-      top: -100px;
-      right: -100px;
-      z-index: 0;
-    }
-
-    .form-container::after {
-      content: "";
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.03));
-      border-radius: 50%;
-      bottom: -75px;
-      left: -75px;
-      z-index: 0;
-    }
-
-    .header {
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       text-align: center;
-      margin-bottom: 32px;
-      position: relative;
-      z-index: 2;
+      max-width: 600px;
+      width: 90%;
+      animation: fadeIn 1s ease-in-out;
     }
 
-    .header h2 {
-      font-size: 32px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: -0.5px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .header p {
-      color: var(--text-secondary);
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 15px;
       font-size: 16px;
+      transition: all 0.3s;
     }
 
-    form {
-      position: relative;
-      z-index: 2;
-    }
-
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    label {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 8px;
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 16px 20px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      font-size: 16px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+    input[type="text"]:focus {
+      border-color: #74ebd5;
       outline: none;
-      transition: var(--transition);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 140px;
-    }
-
-    input:focus, textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
-    }
-
-    .button-container {
-      position: relative;
-      margin-top: 16px;
     }
 
     button {
-      width: 100%;
-      padding: 18px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border: none;
+      padding: 12px 25px;
+      background: #74ebd5;
       color: white;
+      border: none;
+      border-radius: 8px;
       font-size: 16px;
-      font-weight: 600;
-      border-radius: var(--radius);
       cursor: pointer;
-      transition: var(--transition);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background 0.3s;
     }
 
     button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+      background: #4db8a5;
     }
 
-    button:active {
-      transform: translateY(0);
-    }
-
-    button::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
-
-    button:hover::before {
-      transform: translateX(100%);
-    }
-
-    .alert {
+    .footer {
       margin-top: 20px;
-      padding: 16px;
-      border-radius: var(--radius);
-      font-size: 15px;
-      font-weight: 500;
-      display: none;
-      text-align: center;
-      transition: var(--transition);
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    .alert.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .alert.success {
-      background-color: rgba(16, 185, 129, 0.1);
-      color: var(--success);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-
-    .alert.error {
-      background-color: rgba(239, 68, 68, 0.1);
-      color: var(--error);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-    }
-
-    /* Form animation */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .form-container {
-      animation: fadeIn 0.6s ease-out forwards;
-    }
-
-    /* Input focus effects */
-    .input-wrapper {
-      position: relative;
-    }
-
-    .input-wrapper::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: var(--primary);
-      transition: width 0.3s ease, left 0.3s ease;
-    }
-
-    .input-wrapper:focus-within::after {
-      width: 100%;
-      left: 0;
-    }
-
-    /* Send icon with animation */
-    .send-icon {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-      stroke-width: 2;
-      transition: var(--transition);
-    }
-
-    button:hover .send-icon {
-      transform: translateX(3px);
-    }
-
-    /* Loading spinner */
-    .spinner {
-      display: none;
-      width: 24px;
-      height: 24px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: white;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    button.loading .send-icon {
-      display: none;
-    }
-
-    button.loading .spinner {
-      display: inline-block;
-    }
-
-    /* Mobile responsive */
-    @media (max-width: 500px) {
-      .form-container {
-        padding: 30px 24px;
-      }
+      font-size: 12px;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <div class="header">
-      <h2>Form Request</h2>
-      <p>Kirim permintaan Anda dengan mengisi form di bawah ini</p>
+
+  <div class="container">
+    <h1>Website Screenshot Generator</h1>
+    <input type="text" id="urlInput" placeholder="Masukkan URL website...">
+    <br>
+    <button onclick="generateScreenshot()">Kirim Screenshot ke Telegram</button>
+
+    <div class="footer">
+      Screenshot akan dikirim ke bot Telegram Anda
     </div>
-    <form id="requestForm">
-      <div class="form-group">
-        <label for="nama">Nama</label>
-        <div class="input-wrapper">
-          <input 
-            type="text" 
-            id="nama" 
-            name="nama" 
-            placeholder="Masukkan nama lengkap" 
-            required 
-          />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="pesan">Detail Permintaan</label>
-        <div class="input-wrapper">
-          <textarea 
-            id="pesan" 
-            name="pesan" 
-            placeholder="Jelaskan permintaan Anda secara detail" 
-            required
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="button-container">
-        <button type="submit" id="submitBtn">
-          <span>Kirim Request</span>
-          <svg class="send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
-          <div class="spinner"></div>
-        </button>
-      </div>
-      <div id="alertSuccess" class="alert success">✅ Request berhasil dikirim!</div>
-      <div id="alertError" class="alert error">❌ Gagal mengirim request! Coba lagi.</div>
-    </form>
   </div>
 
   <script>
-    document.getElementById("requestForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      
-      const submitBtn = document.getElementById("submitBtn");
-      submitBtn.classList.add("loading");
-      
-      const nama = document.getElementById("nama").value;
-      const pesan = document.getElementById("pesan").value;
-      const waktu = new Date().toLocaleString('id-ID');
-
-      // Default values
-      const divisi = "N/A";
-      const prioritas = "Normal";
-
-      try {
-        const res = await fetch("/api/request", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ nama, divisi, pesan, prioritas, waktu })
-        });
-
-        const alertSuccess = document.getElementById("alertSuccess");
-        const alertError = document.getElementById("alertError");
-        
-        if (res.ok) {
-          alertSuccess.style.display = "block";
-          alertSuccess.classList.add("show");
-          setTimeout(() => {
-            alertSuccess.classList.remove("show");
-            setTimeout(() => {
-              alertSuccess.style.display = "none";
-              document.getElementById("requestForm").reset();
-            }, 300);
-          }, 2000);
-        } else {
-          alertError.style.display = "block";
-          alertError.classList.add("show");
-          setTimeout(() => {
-            alertError.classList.remove("show");
-            setTimeout(() => {
-              alertError.style.display = "none";
-            }, 300);
-          }, 3000);
-        }
-      } catch (error) {
-        const alertError = document.getElementById("alertError");
-        alertError.style.display = "block";
-        alertError.classList.add("show");
-        setTimeout(() => {
-          alertError.classList.remove("show");
-          setTimeout(() => {
-            alertError.style.display = "none";
-          }, 300);
-        }, 3000);
-      } finally {
-        submitBtn.classList.remove("loading");
+    function generateScreenshot() {
+      const url = document.getElementById('urlInput').value.trim();
+      if (!url) {
+        alert('Masukkan URL terlebih dahulu.');
+        return;
       }
-    });
 
-    // Add subtle animations when inputs are focused
-    const inputs = document.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-      input.addEventListener('focus', () => {
-        input.parentElement.classList.add('active');
-      });
-      
-      input.addEventListener('blur', () => {
-        input.parentElement.classList.remove('active');
-      });
-    });
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = '/api/screenshot';
+
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'url';
+      input.value = url;
+
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+    }
   </script>
+
 </body>
 </html>
