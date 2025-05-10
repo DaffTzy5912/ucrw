@@ -7,7 +7,7 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
-const TELEGRAM_BOT_TOKEN = "7990890271:AAFHGe2etMiRhZxaZj8JbcVHdPnBx-yHqB8";
+const TELEGRAM_BOT_TOKEN = "8160121155:AAGYo5YFLZUqi1jq6nwzY6XOGzH8cTzVJJ0";
 const TELEGRAM_USER_ID = "7341190291";
 
 app.use(bodyParser.urlencoded({ extended: true }));
